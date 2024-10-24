@@ -148,12 +148,16 @@ class Manager:
             l = [i  if i != 11 else 1 for i in l]
             s = self.dealer.sum()
             ps = self.player.sum()
-            if 21 >= ps and s<21 and s<ps:
-                self.addCard(self.dealer)
-            elif 21 >= ps and sum(l)<21 and sum(l)<ps:
-                self.addCard(self.dealer)
-            else:
+            if ps > 21 or s > 21:
                 break
+            if s == ps and s <= 16:
+                self.addCard(self.dealer)
+            elif s < ps and s <= 19:
+                self.addCard(self.dealer)
+            elif ps <= 21 and ps <= s <= 21:
+                break
+
+
 
         if (self.player.sum() < self.dealer.sum() <= 21) or self.player.sum() > 21:
             print('YOU LOSE')
